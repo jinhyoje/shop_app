@@ -1,6 +1,8 @@
 package com.example.shop_app.domain.dto;
 
 import com.example.shop_app.domain.model.Member;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

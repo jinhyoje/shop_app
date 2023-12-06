@@ -140,9 +140,17 @@
   <div class="actions">
     <a th:href="@{/edit/{id}(id=${id})}">수정</a>
     <a th:href="@{/delete/{id}(id=${id})}">삭제</a>
+    <button onclick="onDelete()">삭제</button>
   </div>
 
-
+  <script>
+    function onDelete() {
+      const r = confirm("정말로 삭제 하시겠습니까?");
+      if (r) {
+        location.href = "/delete/" + [[${id}]];
+      }
+    }
+  </script>
 </div>
 </body>
 </html>

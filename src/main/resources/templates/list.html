@@ -1,53 +1,189 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>유저 목록화면</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>유저 목록화면</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        /* 기본 스타일 */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        /* 헤더 및 타이틀 */
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* 내비게이션 바 */
+        .navigation {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .navigation a:hover {
+            color: #f4f4f4;
+        }
+
+        /* 검색 폼 */
+        .searchForm {
+            margin: 20px 0;
+        }
+
+        .searchForm form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .searchForm input[type="text"],
+        .searchForm select {
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        /* 사용자 목록 */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: white;
+            border: 1px solid #ddd;
+            margin-bottom: 5px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        li span {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        /* 버튼 */
+        button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        /* 더보기 버튼 */
+        .moreDiv {
+            margin-top: 20px;
+        }
+
+    </style>
 </head>
 <body>
 <div class="container">
-  <h1>유저 목록화면</h1>
+    <h1>유저 목록화면</h1>
 
-  <div class="navigation">
-    <a href="/register">등록화면</a>
-    <a href="/list">목록화면</a>
-  </div>
+    <div class="navigation">
+        <a href="/register">등록화면</a>
+        <a href="/list">목록화면</a>
+        <a href="/allDelete">전체삭제</a>
+    </div>
 
-  <ul>
-    <li th:each="member, memberStat : ${memberList}">
-        <a th:href="@{/member/{id}(id=${member.id})}">
+    <div class="searchForm" style="text-align: center">
+        <form action="/search" method="get">
+            <select name="" id="">
+                <option value="">이름</option>
+                <option value="">전화번호</option>
+                <option value="">사용자ID</option>
+            </select>
+            <input type="text" name="keyword" placeholder="검색어를 입력하세요" autocomplete="true" style="width: 100px">
+            <button type="submit">검색</button>
+        </form>
+    </div>
+
+
+    <ul>
+        <li th:each="member, memberStat : ${memberList}">
+            <a th:href="@{/member/{id}(id=${member.id})}">
         <span>
             <strong>번호:</strong>
             <span th:text="${memberStat.index + 1}"></span>
         </span>
-      <span>
+                <span>
             <strong>이름:</strong>
             <span th:text="${member.name}"></span>
         </span>
-      <span>
+                <span>
             <strong>사용자 ID:</strong>
             <span th:text="${member.memberId}"></span>
         </span>
-      <span>
+                <span>
             <strong>비밀번호:</strong>
             <span th:text="${member.password}"></span>
         </span>
-      <span>
+                <span>
             <strong>전화번호:</strong>
             <span th:text="${member.phone}"></span>
         </span>
-      <span>
+                <span>
             <strong>나이:</strong>
             <span th:text="${member.age}"></span>
         </span>
-        </a>
-    </li>
-  </ul>
+            </a>
+            <button th:attr="onclick=|onDelete('' + ${member.id} + '')|">삭제</button>
+        </li>
+    </ul>
+    <div class="moreDiv" style="text-align: center">
+        <button onclick="onMore()">더보기</button>
+    </div>
 
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const mode = [[${mode}]];
+        const list = [[${memberList}]];
+        if (list.length > 0 && mode === "c") {
+            alert("성공");
+            location.replace("/");
+        }
+
+        /*]]>*/
+
+        function onDelete(id) {
+            const r = confirm("정말로 삭제 하시겠습니까?");
+            if (r) {
+                location.href = "/delete/" + id;
+            }
+        }
+
+        function onMore() {
+            location.replace("/list?page=" + [[${page} +1]]);
+        }
+    </script>
 </div>
 </body>
 </html>
