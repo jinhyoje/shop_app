@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>사용자 상세정보</title>
+
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 80%;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .navigation {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .navigation a {
+      margin: 0 10px;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: white;
+      background-color: #007bff;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .navigation a:hover {
+      background-color: #0056b3;
+    }
+
+    .navigation, .actions {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .navigation a, .actions a {
+      margin: 0 10px;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: white;
+      background-color: #007bff;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .navigation a:hover, .actions a:hover {
+      background-color: #0056b3;
+    }
+
+    .user-details {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-details p {
+      font-size: 16px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: #fff;
+      margin-bottom: 10px;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    @media (min-width: 600px) {
+      li {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (min-width: 1000px) {
+      li {
+        width: 60%;
+      }
+    }
+
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="number"], input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+
+
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>사용자 상세 정보</h1>
+  <div class="navigation">
+    <a href="/register">등록화면</a>
+    <a href="/list">목록화면</a>
+  </div>
+  <div class="user-details">
+    <p>이름: <span id="userName" th:text="${member.name}"></span></p>
+    <p>전화번호: <span id="userPhone" th:text="${member.phone}"></span></p>
+    <p>나이: <span id="userAge" th:text="${member.age}"></span></p>
+    <p>사용자 ID: <span id="memberId" th:text="${member.memberId}"></span></p>
+  </div>
+
+
+  <div class="actions">
+    <a th:href="@{/edit/{id}(id=${id})}">수정</a>
+    <a th:href="@{/delete/{id}(id=${id})}">삭제</a>
+  </div>
+
+
+</div>
+</body>
+</html>

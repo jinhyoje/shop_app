@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>유저 목록화면</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="container">
+  <h1>유저 목록화면</h1>
+
+  <div class="navigation">
+    <a href="/register">등록화면</a>
+    <a href="/list">목록화면</a>
+  </div>
+
+  <ul>
+    <li th:each="member, memberStat : ${memberList}">
+        <a th:href="@{/member/{id}(id=${member.id})}">
+        <span>
+            <strong>번호:</strong>
+            <span th:text="${memberStat.index + 1}"></span>
+        </span>
+      <span>
+            <strong>이름:</strong>
+            <span th:text="${member.name}"></span>
+        </span>
+      <span>
+            <strong>사용자 ID:</strong>
+            <span th:text="${member.memberId}"></span>
+        </span>
+      <span>
+            <strong>비밀번호:</strong>
+            <span th:text="${member.password}"></span>
+        </span>
+      <span>
+            <strong>전화번호:</strong>
+            <span th:text="${member.phone}"></span>
+        </span>
+      <span>
+            <strong>나이:</strong>
+            <span th:text="${member.age}"></span>
+        </span>
+        </a>
+    </li>
+  </ul>
+
+</div>
+</body>
+</html>
