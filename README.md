@@ -30,7 +30,7 @@
     2. 사용자 정보를 수정할 수 있는 폼이 표시됩니다.
     3. 수정 후 '저장'을 클릭하거나 '삭제'를 클릭하여 사용자를 제거합니다.
 - **스크린샷/도면**:
-- ![image](https://github.com/jinhyoje/shop_app/assets/84319636/35ba72ec-13de-4afa-84e9-e09e02acd9ba)
+- ![image](https://github.com/jinhyoje/shop_app/assets/84319636/732b878f-8173-4d9c-8e34-9581178be143)
 - ![image](https://github.com/jinhyoje/shop_app/assets/84319636/bb086e7b-5dec-4746-84ee-d9f77a6fdc52)
 
 
